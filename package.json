@@ -1,12 +1,11 @@
 {
-  "name": "copy_model",
+  "name": "expenses",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seeder": "node models/seeds/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

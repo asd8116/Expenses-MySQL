@@ -7,7 +7,6 @@ const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
 const app = express()
-const mongoose = require('mongoose')
 
 // 判別開發環境
 if (process.env.NODE_ENV !== 'production') {
@@ -77,7 +76,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/', require('./routes/home'))
-app.use('/rewrites', require('./routes/rewrites'))
+app.use('/records', require('./routes/records'))
 app.use('/users', require('./routes/users'))
 app.use('/auth', require('./routes/auths'))
 
