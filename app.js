@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 // app.use('/auth', require('./routes/auths'))
 app.use('/users', require('./routes/users'))
 app.use('/', authenticated, require('./routes/home'))
-app.use('/records', require('./routes/records'))
+app.use('/records', authenticated, require('./routes/records'))
 
 app.listen(process.env.PORT || 3000, () => {
   db.sequelize.sync()
