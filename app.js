@@ -9,9 +9,9 @@ const flash = require('connect-flash')
 const app = express()
 
 // 判別開發環境
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
+// }
 
 Handlebars.registerHelper('switch', function(value, options) {
   this.switch_value = value
@@ -24,20 +24,6 @@ Handlebars.registerHelper('case', function(value, options) {
     this.switch_break = true
     return options.fn(this)
   }
-})
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/records', {
-  useNewUrlParser: true,
-  useCreateIndex: true
-})
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
-db.once('open', () => {
-  console.log('mongodb connected!')
 })
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
