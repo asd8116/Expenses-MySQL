@@ -11,9 +11,9 @@ const db = require('./models')
 const { authenticated } = require('./config/auth')
 
 // 判別開發環境
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
-// }
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config() // 使用 dotenv 讀取 .env 檔案
+}
 
 Handlebars.registerHelper('switch', function(value, options) {
   this.switch_value = value
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 })
 
 // routes
-// app.use('/auth', require('./routes/auths'))
+app.use('/auth', require('./routes/auths'))
 app.use('/users', require('./routes/users'))
 app.use('/', authenticated, require('./routes/home'))
 app.use('/records', authenticated, require('./routes/records'))
