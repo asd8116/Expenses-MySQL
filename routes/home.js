@@ -7,21 +7,19 @@ const User = db.User
 router.get('/', (req, res) => {
   const user = User.findByPk(req.user.id)
     .then(user => {
-      if (!user) {
-        return res.error()
-      }
-      Record.findAll({
-        where: {
-          UserId: req.user.id
-        }
-      }).then(records => {
-        let totalAmount = 0
-        for (record of records) {
-          totalAmount += record.amount
-        }
+      if (!user) throw new Error('User not found')
 
-        return res.render('index', { records, totalAmount })
+      return Record.findAll({
+        where: { UserId: req.user.id }
       })
+    })
+    .then(records => {
+      let totalAmount = 0
+      for (record of records) {
+        totalAmount += record.amount
+      }
+
+      return res.render('index', { records, totalAmount })
     })
     .catch(error => {
       return res.status(422).json(error)
