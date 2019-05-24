@@ -11,7 +11,7 @@ module.exports = passport => {
 
       if (!user) return done(null, false, { message: 'That email is not registered' })
 
-      const isMatch = await bcrypt.compare(passport, user.password)
+      const isMatch = await bcrypt.compare(password, user.password)
 
       if (isMatch) return done(null, user)
       else return done(null, false, { message: 'Email and Password incorrect' })
@@ -36,8 +36,7 @@ module.exports = passport => {
           .toString(36)
           .slice(-8)
 
-        const salt = bcrypt.genSalt(10)
-        const hash = bcrypt.hash(randomPassword, salt)
+        const hash = bcrypt.hashSync(randomPassword, 10)
 
         const newUser = new User({ name, email, password: hash })
         await newUser.save()
